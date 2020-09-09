@@ -1,7 +1,7 @@
 'use strict';
 
 function getRepos() {
-    fetch('https://api.github.com/users/' + `${$("#js-username").val()}` + '/repos')
+    fetch('https://api.github.com/users/' + `${$("#js-username").val()}` + '/repos?sort=created')
     .then(response => response.json())
     .then(responseJson => 
       displayResults(responseJson))
@@ -26,15 +26,15 @@ function displayResults(responseJson) {
 function generateResultsList(responseJson) {
     let resultsHtml = ''
     let userName = '${responseJson.value[i].name}'
-    let repoLink = '{responseJson.value[i].html_url}'
+    let repoLink = '${responseJson.value[i].html_url}'
     for(let i=0; i<responseJson.length; i++) {
+        console.log(responseJson[i]);
       resultsHtml += `<li><h3><p>${userName}</p></h3>
       <a href="${repoLink}">${repoLink}</a>
       </li>`;
     }
     return resultsHtml;
-    return userName;
-    return repoLink;
+    console.log(resultsHtml)
   }
 
 function watchForm() {
